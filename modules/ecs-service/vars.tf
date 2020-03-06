@@ -54,7 +54,7 @@ variable "TASK_ROLE_ARN" {
 variable "ALB_ARN" {
 }
 
-variable "TEMPLATE_PATH" {
+variable "TASK_DEFINITION_ARN" {
   default = ""
 }
 

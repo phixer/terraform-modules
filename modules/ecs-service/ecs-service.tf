@@ -19,7 +19,7 @@ data "aws_ecs_task_definition" "ecs-service" {
 #
 
 data "template_file" "ecs-service" {
-  template = var.TEMPLATE_PATH != "" ? var.TEMPLATE_PATH : file("${path.module}/ecs-service.json")
+  template = file("${path.module}/ecs-service.json")
 
   vars = {
     APPLICATION_NAME    = var.APPLICATION_NAME
@@ -50,7 +50,7 @@ resource "aws_ecs_task_definition" "ecs-service-taskdef" {
 resource "aws_ecs_service" "ecs-service" {
   name    = var.APPLICATION_NAME
   cluster = var.CLUSTER_ARN
-  task_definition = "${aws_ecs_task_definition.ecs-service-taskdef.family}:${max(
+  task_definition = var.TASK_DEFINITION_ARN != "" ? var.TASK_DEFINITION_ARN : "${aws_ecs_task_definition.ecs-service-taskdef.family}:${max(
     aws_ecs_task_definition.ecs-service-taskdef.revision,
     data.aws_ecs_task_definition.ecs-service.revision,
   )}"
