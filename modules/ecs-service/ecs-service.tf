@@ -19,7 +19,7 @@ data "aws_ecs_task_definition" "ecs-service" {
 #
 
 data "template_file" "ecs-service" {
-  template = file("${path.module}/ecs-service.json")
+  template = var.TEMPLATE_PATH != "" ? var.TEMPLATE_PATH : file("${path.module}/ecs-service.json")
 
   vars = {
     APPLICATION_NAME    = var.APPLICATION_NAME
