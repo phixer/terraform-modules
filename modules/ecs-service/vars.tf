@@ -55,5 +55,6 @@ variable "ALB_ARN" {
 }
 
 variable "TEMPLATE_PATH" {
+  default = ""
 }
 
