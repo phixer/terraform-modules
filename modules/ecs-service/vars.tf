@@ -38,6 +38,10 @@ variable "HEALTHCHECK_MATCHER" {
   default = "200"
 }
 
+variable "HEALTHCHECK_PATH" {
+  default = "/"
+}
+
 variable "CPU_RESERVATION" {
 }
 
