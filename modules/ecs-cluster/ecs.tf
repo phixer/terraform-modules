@@ -27,7 +27,7 @@ resource "aws_ecs_cluster" "cluster" {
 }
 
 data "template_file" "ecs_init" {
-  template = file("${path.module}/templates/ecs_init.tpl")
+  template = var.TEMPLATE_FILE == "" ? file("${path.module}/templates/ecs_init.tpl") : var.TEMPLATE_FILE
   vars = {
     CLUSTER_NAME = var.CLUSTER_NAME
   }

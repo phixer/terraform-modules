@@ -46,3 +46,7 @@ variable "SSH_SG" {
   default = ""
 }
 
+variable "TEMPLATE_FILE" {
+  default = ""
+}
+
