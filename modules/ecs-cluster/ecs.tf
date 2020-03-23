@@ -27,7 +27,7 @@ resource "aws_ecs_cluster" "cluster" {
 }
 
 data "template_file" "ecs_init" {
-  template = var.TEMPLATE_FILE == "" ? file("${path.module}/templates/ecs_init.tpl") : var.TEMPLATE_FILE
+  template = file("${path.module}/templates/ecs_init.tpl")
   vars = {
     CLUSTER_NAME = var.CLUSTER_NAME
   }
@@ -43,7 +43,8 @@ resource "aws_launch_configuration" "cluster" {
   key_name             = var.SSH_KEY_NAME
   iam_instance_profile = aws_iam_instance_profile.cluster-ec2-role.id
   security_groups      = [aws_security_group.cluster.id]
-  user_data            = data.template_file.ecs_init.rendered
+  user_data            = var.USER_DATA_BASE64 == "" ? data.template_file.ecs_init.rendered : null
+  user_data_base64     = var.USER_DATA_BASE64 == "" ? null : var.USER_DATA_BASE64
   lifecycle {
     create_before_destroy = true
   }

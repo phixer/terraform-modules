@@ -46,7 +46,7 @@ variable "SSH_SG" {
   default = ""
 }
 
-variable "TEMPLATE_FILE" {
+variable "USER_DATA_BASE64" {
   default = ""
 }
 
