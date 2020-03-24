@@ -43,9 +43,11 @@ variable "HEALTHCHECK_PATH" {
 }
 
 variable "CPU_RESERVATION" {
+  default = 0
 }
 
 variable "MEMORY_RESERVATION" {
+  default = 128
 }
 
 variable "LOG_GROUP" {
