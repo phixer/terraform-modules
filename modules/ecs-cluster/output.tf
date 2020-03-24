@@ -10,3 +10,6 @@ output "cluster_sg" {
   value = aws_security_group.cluster.id
 }
 
+output "cluster_ec2_role" {
+  value = aws_iam_instance_profile.cluster-ec2-role
+}
