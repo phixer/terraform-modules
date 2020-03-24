@@ -62,3 +62,7 @@ variable "TASK_DEFINITION_ARN" {
   default = ""
 }
 
+variable "SCHEDULING_STRATEGY" {
+  default = "REPLICA"
+}
+
