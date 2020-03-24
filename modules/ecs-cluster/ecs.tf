@@ -43,8 +43,7 @@ resource "aws_launch_configuration" "cluster" {
   key_name             = var.SSH_KEY_NAME
   iam_instance_profile = aws_iam_instance_profile.cluster-ec2-role.id
   security_groups      = [aws_security_group.cluster.id]
-  user_data            = var.USER_DATA_BASE64 == "" ? data.template_file.ecs_init.rendered : null
-  user_data_base64     = var.USER_DATA_BASE64 == "" ? null : var.USER_DATA_BASE64
+  user_data            = data.template_file.ecs_init.rendered
   lifecycle {
     create_before_destroy = true
   }
@@ -56,7 +55,7 @@ resource "aws_launch_configuration" "cluster" {
 resource "aws_autoscaling_group" "cluster" {
   name                 = "ecs-${var.CLUSTER_NAME}-autoscaling"
   vpc_zone_identifier  = split(",", var.VPC_SUBNETS)
-  launch_configuration = aws_launch_configuration.cluster.name
+  launch_configuration = var.LAUNCH_CONFIGURATION == "" ? aws_launch_configuration.cluster.name : var.LAUNCH_CONFIGURATION
   termination_policies = split(",", var.ECS_TERMINATION_POLICIES)
   min_size             = var.ECS_MINSIZE
   max_size             = var.ECS_MAXSIZE

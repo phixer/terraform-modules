@@ -46,7 +46,7 @@ variable "SSH_SG" {
   default = ""
 }
 
-variable "USER_DATA_BASE64" {
+variable "LAUNCH_CONFIGURATION" {
   default = ""
 }
 
