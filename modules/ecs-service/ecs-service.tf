@@ -58,7 +58,7 @@ resource "aws_ecs_service" "ecs-service" {
   desired_count                      = var.DESIRED_COUNT
   deployment_minimum_healthy_percent = var.DEPLOYMENT_MINIMUM_HEALTHY_PERCENT
   deployment_maximum_percent         = var.DEPLOYMENT_MAXIMUM_PERCENT
-  scheduling_strategy                = var.scheduling_strategy
+  scheduling_strategy                = var.SCHEDULING_STRATEGY
 
   load_balancer {
     target_group_arn = aws_alb_target_group.ecs-service.id
